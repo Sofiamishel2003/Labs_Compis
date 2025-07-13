@@ -11,7 +11,10 @@ En este laboratorio trabajarás con **ANTLR**, un generador de analizadores sint
 1. **Construir y Ejecutar el Contenedor Docker**Desde el directorio raíz de este laboratorio, ejecuta el siguiente comando para construir la imagen y lanzar un contenedor interactivo:
 
    ```bash
-   docker build --rm . -t lab1-image && docker run --rm -ti -v "$(pwd)/program":/program lab1-image
+    docker build --rm . -t lab1-image
+   ```
+   ```bash
+    docker run --rm -ti -v "${PWD}/program:/program" lab1-image
    ```
 2. **Entender el Entorno**
 
