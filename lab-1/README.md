@@ -25,7 +25,11 @@ En este laboratorio trabajarás con **ANTLR**, un generador de analizadores sint
    ```bash
    antlr -Dlanguage=Python3 MiniLang.g4
    ```
-4. **Ejecutar el Analizador**
+   Me dió error entonces lo tuve que correr cómo:
+   ```bash
+   java -jar /usr/local/lib/antlr-4.13.1-complete.jar -Dlanguage=Python3 MiniLang.g4
+   ```
+5. **Ejecutar el Analizador**
    Usa el driver para analizar el archivo de prueba:
 
    ```bash
