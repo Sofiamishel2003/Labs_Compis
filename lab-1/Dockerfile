@@ -28,6 +28,7 @@ FROM ubuntu:latest
 # RUN cp -a /opt/certs/* /usr/local/share/ca-certificates/
 # RUN update-ca-certificates
 
+
 # Install packages
 RUN apt-get update && apt-get install -y \
     curl \
@@ -36,34 +37,28 @@ RUN apt-get update && apt-get install -y \
     fontconfig \
     fonts-dejavu-core \
     software-properties-common \
+    python3-pip \
+    dos2unix \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get update && apt-get install -y \
-    python3-pip
+RUN add-apt-repository ppa:deadsnakes/ppa && apt-get update
 
 # Install ANTLR
-# We are using a version we downloaded from https://www.antlr.org/download/antlr-4.13.1-complete.jar
 COPY antlr-4.13.1-complete.jar /usr/local/lib/antlr-4.13.1-complete.jar
 
 COPY ./commands/antlr /usr/local/bin/antlr
 RUN chmod +x /usr/local/bin/antlr
-COPY ./commands/antlr /usr/bin/antlr
-RUN chmod +x /usr/bin/antlr
-
 COPY ./commands/grun /usr/local/bin/grun
 RUN chmod +x /usr/local/bin/grun
-COPY ./commands/grun /usr/bin/grun
-RUN chmod +x /usr/bin/grun
 
 # Python virtual env
 COPY python-venv.sh .
-RUN chmod +x ./python-venv.sh
+RUN dos2unix ./python-venv.sh && chmod +x ./python-venv.sh
 RUN ./python-venv.sh
 
+# Python requirements
 COPY requirements.txt .
-# Not production-intended, never do this, this is just a simple example
-RUN pip install -r requirements.txt --break-system-packages 
+RUN pip install -r requirements.txt --break-system-packages
 
 # Set user
 ARG USER=appuser
@@ -77,4 +72,5 @@ RUN adduser \
     "${USER}"
 USER ${UID}
 
+# Set working directory
 WORKDIR /program
