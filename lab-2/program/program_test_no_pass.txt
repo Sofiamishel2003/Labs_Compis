@@ -2,3 +2,9 @@
 (3 + 2) * "7"
 9.0 - true
 "hello" + 3
+2 ^ "3"
+true ^ 4
+5.5 % 2
+"hello" % 3
+false + 1
+"hi" * 2

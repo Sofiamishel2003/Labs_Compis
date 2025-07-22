@@ -6,6 +6,7 @@ stat: expr NEWLINE ;
 
 expr: expr op=('*'|'/') expr       # MulDiv
     | expr op=('+'|'-') expr       # AddSub
+    | expr op=('^'|'%') expr       # PowMod
     | INT                          # Int
     | FLOAT                        # Float
     | STRING                       # String
