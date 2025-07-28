@@ -38,6 +38,22 @@ Experimentarás con un sistema de tipos básico, extenderás una gramática y co
    - ✅ Si el archivo es sintácticamente correcto y, además, no hay problemas de tipo, **se mostrará que la validación de tipos fue exitosa**.
    - ❌ Si existen errores sintácticos, o errores de tipo, ANTLR los mostrará en la consola.
 
+## No me funcionaron correctamnete, esta es la secuencia correcta de los comandos: 
+   **Primero generar lexer y parser para visitor y correr los tests**
+   ```bash
+   java -jar /usr/local/lib/antlr-4.13.1-complete.jar -Dlanguage=Python3 -visitor SimpleLang.g4			*** Esto es para utilizar un Visitor ***
+   python3 Driver.py program_test_pass.txt		*** Corer test con todo bien ***
+   python3 Driver.py program_test_no_pass.txt   *** Corer test con los errores***
+
+   ```
+
+   **Despues, borrar todos los archivos generados al correr el lexer y parser, generar lexer y parser para listener y correr los tests**
+
+    ```bash
+   java -jar /usr/local/lib/antlr-4.13.1-complete.jar -Dlanguage=Python3 -listener SimpleLang.g 		*** Esto es para utilizar un Listener ***
+   python3 DriverListener.py program_test_pass.txt		                                                *** Corer test con todo bien ***
+   python3 Driver.py program_test_pass.txt		                                                      *** Corer test con los errores***
+   ```
 ## 📋 Entregables
 
 - **Deben utilizar ambos Visitor y Listener para realizar las actividades de este lab.**
